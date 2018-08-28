@@ -1,9 +1,22 @@
 #include <Arduino.h>
 
+#define pinoPIR 2
+#define pinoSaida 13
+int valor = 0;
+
 void setup() {
-    // put your setup code here, to run once:
+    pinMode(pinoPIR, INPUT);
+    pinMode(pinoSaida, OUTPUT);
+    Serial.begin(9600);
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
+    valor = digitalRead(pinoPIR);
+    while(valor){
+        digitalWrite(pinoSaida, HIGH);
+        Serial.println("Presença");
+        valor = digitalRead(pinoPIR);
+        delay(2000);
+    }
+    digitalWrite(pinoSaida, LOW);
 }
